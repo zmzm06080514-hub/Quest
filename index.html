@@ -149,7 +149,8 @@
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-analytics.js";
-  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+  // 1. doc과 setDoc을 추가로 import 합니다.
+  import { getFirestore, collection, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyAfuqKL7Tf8gS8jSaUWf47PvqXEpoHPRoQ",
@@ -185,10 +186,15 @@
     submitBtn.classList.add('loading');
 
     try {
-      await addDoc(collection(db, 'applications'), {
-        name, contact, desc,
+      // 2. addDoc 대신 setDoc을 사용합니다. 
+      // doc(db, '컬렉션명', '문서ID') 구조로 'contact' 변수값을 ID로 지정합니다.
+      await setDoc(doc(db, 'applications', contact), {
+        name, 
+        contact, 
+        desc,
         createdAt: serverTimestamp()
       });
+
       closeModal();
       document.getElementById('f-name').value = '';
       document.getElementById('f-contact').value = '';
