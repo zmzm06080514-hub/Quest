@@ -187,8 +187,8 @@
 
     try {
       // 2. addDoc 대신 setDoc을 사용합니다. 
-      // doc(db, '컬렉션명', '문서ID') 구조로 'contact' 변수값을 ID로 지정합니다.
-      await setDoc(doc(db, 'applications', contact), {
+      // doc(db, '컬렉션명', '문서ID') 구조로 'name' 변수값을 ID로 지정합니다.
+      await setDoc(doc(db, 'applications', name), {
         name, 
         contact, 
         desc,
