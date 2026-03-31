@@ -28,9 +28,11 @@ export class EventManager {
   /**
    * 폼 제출 버튼 이벤트 등록
    */
-  public registerFormSubmitEvent(onSubmit: () => void): void {
+  public registerFormSubmitEvent(onSubmit: (e: Event) => void): void {
+    const form = document.getElementById('f-contact') as HTMLFormElement | null;
     const submitButton = document.getElementById('modal-submit');
-    submitButton?.addEventListener('click', onSubmit);
+    form?.addEventListener('submit', onSubmit);
+    submitButton?.addEventListener('click', () => form?.requestSubmit());
   }
 
   /**

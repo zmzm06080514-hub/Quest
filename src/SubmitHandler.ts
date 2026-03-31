@@ -25,10 +25,12 @@ export class SubmitHandler {
     }
 
     this.isSubmitting = true;
+    console.debug('SubmitHandler.submit 시작', data);
 
     try {
       const validation = DataProcessor.validate(data);
       if (!validation.isValid) {
+        console.warn('SubmitHandler validation 실패', validation);
         return {
           success: false,
           message: validation.errors.join(', '),
@@ -36,7 +38,9 @@ export class SubmitHandler {
       }
 
       const apiData = DataProcessor.toAPIFormat(data);
-      const response = await this.sendToAPI(apiData);
+      console.debug('Firestore 저장 시도', apiData);
+      const response = await this.sendToFirestore(apiData);
+      console.debug('Firestore 저장 성공', response);
 
       return {
         success: true,
@@ -44,6 +48,7 @@ export class SubmitHandler {
         data: response,
       };
     } catch (error) {
+      console.error('SubmitHandler.submit 전체 실패', error);
       console.error('Submit error:', error);
       return {
         success: false,
@@ -54,16 +59,23 @@ export class SubmitHandler {
     }
   }
 
-  private async sendToAPI(data: FormDataInterface & { timestamp: string }): Promise<unknown> {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          id: Math.random().toString(36).substring(7),
-          timestamp: data.timestamp,
-          status: 'pending',
-        });
-      }, 1500);
+  private async sendToFirestore(data: FormDataInterface & { timestamp: string }): Promise<unknown> {
+    const firestore = (window as any).appFirebase?.firestore;
+    if (!firestore) {
+      throw new Error('Firebase Firestore가 초기화되지 않았습니다.');
+    }
+
+    // Firestore 문서 ID는 랜덤(자동 생성)으로 둡니다.
+    // (중복 신청해도 새로운 문서로 추가됩니다.)
+    const doc = await firestore.collection('applications').add({
+      ...data,
+      createdAt: new Date().toISOString(),
     });
+
+    return {
+      id: doc.id,
+      ...data,
+    };
   }
 
   public getMinSubmitInterval(): number {

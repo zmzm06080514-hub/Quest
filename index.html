@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quest | 포트폴리오 PPT 무료 신청</title>
+    <title>Quest  |  포트폴리오 PPT 무료 신청</title>
     <meta
       name="description"
       content="취업, 입시, 발표용 포트폴리오 PPT 제작을 위한 무료 신청 페이지"
@@ -26,15 +26,18 @@
           <h1>Quest</h1>
           <div class="test-badge">FREE APPLICATION</div>
         </div>
-        <button class="navbar-btn" type="button" data-modal-open>
-          무료 신청
-        </button>
+        <div class="navbar-right">
+          <p class="navbar-meta">평균 24시간 내 1차 응답</p>
+          <button class="navbar-btn" type="button" data-modal-open>
+            신청하기
+          </button>
+        </div>
       </div>
     </nav>
 
     <header class="hero">
       <div class="hero-content">
-        <div class="badge reveal-text">24시간 안에 초안 전달</div>
+        <div class="badge reveal-text">24시간 안에 초본 전달</div>
         <h1 class="hero-title reveal-text">
           포트폴리오 PPT,
           <br />
@@ -44,9 +47,6 @@
           취업, 입시, 발표 자료를 급하게 준비해야 할 때 필요한 정보만 받아
           바로 작업 범위를 정리하는 랜딩 페이지입니다.
         </p>
-        <button class="btn-cta reveal-text" type="button" data-modal-open>
-          지금 무료 신청하기
-        </button>
       </div>
     </header>
 
@@ -197,45 +197,41 @@
 
       <section class="section pricing-section">
         <div class="section-header reveal-text">
-          <span class="section-tag">Application</span>
-          <h2 class="section-title">부담 없이 무료 신청부터</h2>
+          <span class="section-tag">Before you apply</span>
+          <h2 class="section-title">신청 전에 확인할 것</h2>
           <p class="section-subtitle">
-            연락 가능한 정보와 요청 내용만 남기면 진행 가능 범위를 먼저
-            안내합니다.
+            신청만 하면 바로 작업 범위를 정리해드려요. 아래 내용만 확인하고
+            편하게 보내주세요.
           </p>
         </div>
 
         <div class="pricing-card reveal-text">
           <div class="price-header">
             <div class="beta-badge">FREE REQUEST</div>
-            <h3 class="price-name">포트폴리오 PPT 무료 신청</h3>
+            <h3 class="price-name">3분 체크리스트 & FAQ</h3>
             <p class="price-desc">
-              신청 접수 후 작업 가능 범위와 일정부터 빠르게 안내합니다.
+              자주 묻는 질문과, 신청 전에 준비하면 좋은 것들을 모았습니다.
             </p>
           </div>
 
-          <ul class="price-features reveal-text">
-            <li>
-              <span class="check-icon">+</span>
-              <span>무료 신청 접수</span>
-            </li>
-            <li>
-              <span class="check-icon">+</span>
-              <span>주제와 목적 기준의 작업 범위 정리</span>
-            </li>
-            <li>
-              <span class="check-icon">+</span>
-              <span>연락처 기준 일정 회신</span>
-            </li>
-            <li>
-              <span class="check-icon">+</span>
-              <span>빠른 일정 대응 가능</span>
-            </li>
-          </ul>
-
-          <button class="btn-primary" type="button" data-modal-open>
-            무료 신청하기
-          </button>
+          <div class="faq-grid reveal-text">
+            <details class="faq-item">
+              <summary>자료가 없어도 신청 가능한가요?</summary>
+              <p>네. 메모/초안/기존 자료가 없어도 목적만 남겨주시면 구조부터 제안해요.</p>
+            </details>
+            <details class="faq-item">
+              <summary>마감 일정은 꼭 적어야 하나요?</summary>
+              <p>가능하면 적어주세요. 일정 기준으로 작업 범위를 더 정확히 안내할 수 있어요.</p>
+            </details>
+            <details class="faq-item">
+              <summary>신청 후에는 어떤 순서로 진행되나요?</summary>
+              <p>접수 → 범위/일정 1차 안내 → 초안 제작 → 피드백 반영 순으로 진행됩니다.</p>
+            </details>
+            <details class="faq-item">
+              <summary>피드백은 몇 번 반영되나요?</summary>
+              <p>신청 내용/범위에 따라 조율됩니다. 보통 필요한 수정 포인트 중심으로 반영해요.</p>
+            </details>
+          </div>
         </div>
       </section>
     </main>
@@ -319,7 +315,7 @@
             <button id="modal-cancel" type="button" class="btn-secondary">
               취소
             </button>
-            <button id="modal-submit" type="button" class="btn-primary">
+            <button id="modal-submit" type="submit" class="btn-primary">
               무료 신청 보내기
             </button>
           </div>
@@ -329,6 +325,26 @@
 
     <div id="toast-container" class="toast-container" aria-live="polite"></div>
 
-    <script type="module" src="src/main.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyAfuqKL7Tf8gS8jSaUWf47PvqXEpoHPRoQ",
+        authDomain: "sunyang-9d6da.firebaseapp.com",
+        projectId: "sunyang-9d6da",
+        storageBucket: "sunyang-9d6da.firebasestorage.app",
+        messagingSenderId: "704663068688",
+        appId: "1:704663068688:web:b47836261e2dfe257c2a95",
+        measurementId: "G-L6KGR7P5KF"
+      };
+
+      if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+      }
+      window.appFirebase = {
+        firestore: firebase.firestore(),
+      };
+    </script>
+    <script type="module" src="dist/main.js"></script>
   </body>
 </html>

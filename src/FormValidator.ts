@@ -29,13 +29,9 @@ export class FormValidator {
       errors.subject = subjectValidation.message || '주제를 입력해주세요.';
     }
 
-    const messageValidation = this.fieldValidator.validateMinLength(
-      data.message,
-      10,
-      '추가 요청사항'
-    );
+    const messageValidation = this.fieldValidator.validateRequired(data.message, '추가 요청사항');
     if (!messageValidation.isValid) {
-      errors.message = messageValidation.message || '추가 요청사항을 10자 이상 입력해주세요.';
+      errors.message = messageValidation.message || '추가 요청사항을 입력해주세요.';
     }
 
     return {

@@ -11,7 +11,8 @@ export class DataProcessor {
   }
 
   public static processName(name: string): string {
-    return name.trim().replace(/\s+/g, ' ').substring(0, 50);
+    // Firestore 문서 ID에는 `/`가 있으면 안 되므로 안전하게 치환합니다.
+    return name.trim().replace(/\s+/g, ' ').replace(/\//g, '-').substring(0, 50);
   }
 
   public static processPhone(phone: string): string {
