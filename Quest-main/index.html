@@ -272,7 +272,7 @@
               id="f-name"
               name="name"
               type="text"
-              placeholder="이름 또는 닉네임"
+              placeholder="이름"
               autocomplete="name"
               required
             />
@@ -332,22 +332,24 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
     <script>
+      // Firebase 구성 (measurementId는 앱에서 사용하지 않는 경우 생략 가능)
       const firebaseConfig = {
         apiKey: "AIzaSyAfuqKL7Tf8gS8jSaUWf47PvqXEpoHPRoQ",
         authDomain: "sunyang-9d6da.firebaseapp.com",
         projectId: "sunyang-9d6da",
         storageBucket: "sunyang-9d6da.appspot.com",
         messagingSenderId: "704663068688",
-        appId: "1:704663068688:web:b47836261e2dfe257c2a95",
-        measurementId: "G-L6KGR7P5KF"
+        appId: "1:704663068688:web:b47836261e2dfe257c2a95"
       };
 
-      if (!firebase.apps.length) {
-        firebase.initializeApp(firebaseConfig);
-      }
+      const app = firebase.apps.length ? firebase.app() : firebase.initializeApp(firebaseConfig);
+      const firestore = firebase.firestore();
+
       window.appFirebase = {
-        firestore: firebase.firestore(),
+        firestore,
       };
+
+      console.log('✅ Firebase initialized', { app, firestore });
     </script>
     <script type="module" src="src/main.js"></script>
   </body>

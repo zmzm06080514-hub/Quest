@@ -994,18 +994,18 @@ body {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #111827;
-    --bg-secondary: #1f2937;
-    --surface: #1f2937;
-    --text-primary: #f3f4f6;
-    --text-secondary: #d1d5db;
+    --bg: #ffffff;
+    --bg-secondary: #ffffff;
+    --surface: #ffffff;
+    --text-primary: #111827;
+    --text-secondary: #6b7280;
     --text-tertiary: #9ca3af;
-    --border: #374151;
-    --border-light: #2d3748;
+    --border: #e5e7eb;
+    --border-light: #f3f4f6;
   }
 
   .navbar {
-    background: rgba(17, 24, 39, 0.8);
+    background: rgba(255, 255, 255, 0.95);
     border-bottom-color: var(--border);
   }
 
